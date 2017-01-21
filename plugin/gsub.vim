@@ -1,10 +1,10 @@
 function! s:DisplaySearchResults(results)
-  silent pedit Greplace-preview
+  silent pedit Gsub-preview
   wincmd P
   setlocal buftype=nofile
   setlocal noswapfile
   setlocal nowrap
-  setlocal filetype=greplace
+  setlocal filetype=gsub
   10wincmd +
   normal ggdG
   call append(0, a:results)

@@ -6,11 +6,11 @@ endfunction
 
 function! s:UpdateLine(file, line_number, line_text)
   " awk 'NR=={print"HELLLLO"};NR!=5'
-  let mv_cmd = a:file . " > /tmp/greplace && mv /tmp/greplace " . a:file
-  let g:replace_cmd = "awk 'NR==" . a:line_number . "{print \"" .
+  let mv_cmd = a:file . " > /tmp/gsub && mv /tmp/gsub " . a:file
+  let g:substitute_cmd = "awk 'NR==" . a:line_number . "{print \"" .
         \ s:cleaned_line(a:line_text) .
         \ "\" };NR!=" . a:line_number . "' " . mv_cmd
-  call system(g:replace_cmd)
+  call system(g:substitute_cmd)
 endfunction
 
 function! s:LineAndText(raw_line)
@@ -24,7 +24,7 @@ function! s:LineAndText(raw_line)
   end
 endfunction
 
-function! s:Greplace()
+function! s:Gsub()
   let changes = []
   let file = ''
 
@@ -51,6 +51,6 @@ function! s:Greplace()
 
   bdelete
 
-  echohl String | echom "Greplace executed succesfully" | echohl None
+  echohl String | echom "Gsub executed succesfully" | echohl None
 endfunction
-command! -buffer Greplace call <sid>Greplace()
+command! -buffer Gsub call <sid>Gsub()
