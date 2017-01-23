@@ -2,6 +2,7 @@ function! gsub#substitute#Gsub() abort
   if s:NotAllSaved()
     echohl Error | echom s:GSUB_UNSAVED_ERROR_MESSAGE | echohl None | return
   endif
+  call s:DeleteHiddenBuffers()
   call s:WriteChanges()
   call s:FlushBuffers()
   bdelete
@@ -43,4 +44,12 @@ function! s:NotAllSaved()
   let buffer_list = range(1, bufnr('$'))
   let unsaved_buffers = filter(buffer_list, s:MODIFIED_FILTER)
   return len(unsaved_buffers) > 0
+endfunction
+
+function s:DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
 endfunction
