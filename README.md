@@ -6,7 +6,7 @@ land), combining the_silver_search for seaching and Vim for defining the
 changes.
 
 This plugin is heavily inspired by the functionality and interface of the
-greplace.vim plugin, but offers and alternative approach in hopes of providing
+greplace.vim plugin, but offers an alternative approach in hopes of providing
 more consitent and reliable changes.
 
 
